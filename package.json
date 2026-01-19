@@ -1,0 +1,26 @@
+{
+  "name": "com.av.unity.extend",
+  "version": "1.0.0",
+  "displayName": "AV Unity Extensions",
+  "description": "Unity extension utilities including caching helpers and component lifecycle improvements.",
+  "unity": "2021.3",
+  "author": {
+    "name": "IAFahim",
+    "email": "iafahim.dev@gmail.com",
+    "url": "https://github.com/IAFahim"
+  },
+  "keywords": [
+    "extensions",
+    "utilities",
+    "helpers",
+    "optimization"
+  ],
+  "category": "Utilities",
+  "dependencies": {},
+  "samples": [],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/IAFahim/AV.Unity.Extend"
+  },
+  "licensesUrl": "https://github.com/IAFahim/AV.Unity.Extend/blob/main/LICENSE.md"
+}
