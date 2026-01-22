@@ -1,0 +1,23 @@
+{
+  "name": "com.av.unity.extend",
+  "version": "1.0.0",
+  "displayName": "AV.Unity.Extend",
+  "description": "Caching utilities and extension methods for Unity including LazyCache for component resolution",
+  "unity": "2022.3",
+  "author": {
+    "name": "IAFahim",
+    "email": "iafahim.dev@gmail.com",
+    "url": "https://github.com/IAFahim"
+  },
+  "keywords": [
+    "cache",
+    "extensions",
+    "utilities",
+    "components",
+    "optimization",
+    "lazy"
+  ],
+  "category": "Utilities",
+  "dependencies": {},
+  "samples": []
+}
