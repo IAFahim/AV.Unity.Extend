@@ -1,62 +1,71 @@
-# AV Unity Extensions
+# AV.Unity.Extend
 
-Unity extension utilities including caching helpers and component lifecycle improvements.
-
-![Unity Version](https://img.shields.io/badge/unity-2021.3%2B-blue.svg)
-![License](https://img.shields.io/badge/license-MIT-green.svg)
-![Version](https://img.shields.io/badge/version-1.0.0-orange.svg)
+Caching utilities and extension methods for Unity including LazyCache for efficient component resolution.
 
 ## Features
 
-- **Professional Quality**: Built following Unity Package Manager best practices
-- **Well Documented**: Comprehensive documentation and examples
-- **Production Ready**: Tested and optimized for production use
+- **LazyCache<T>** - Lazy component resolution with automatic caching
+- **Extension Methods** - Convenient utilities for common Unity operations
+- **Performance Optimized** - Minimize GetComponent calls with smart caching
+- **Generic Support** - Works with any component type
 
 ## Installation
 
-Install this package via Unity Package Manager by adding this line to your `Packages/manifest.json`:
+Install via Unity Package Manager or add to `Packages/manifest.json`:
 
 ```json
-"com.av.unity.extend": "https://github.com/IAFahim/AV.Unity.Extend.git"
+{
+  "dependencies": {
+    "com.av.unity.extend": "1.0.0"
+  }
+}
 ```
-
-Or install via Git URL in Unity Package Manager:
-1. Open Unity Package Manager (Window > Package Manager)
-2. Click the + icon > Add package from git URL
-3. Enter: `https://github.com/IAFahim/AV.Unity.Extend.git`
-
-## Requirements
-
-- Unity 2021.3 or higher
-- Dependencies will be automatically resolved by Unity Package Manager
 
 ## Usage
 
-Add components from the `AV Unity Extensions` package to your GameObjects via the Component menu:
-`Component > AV > Unity Extensions > [Component Name]`
+### LazyCache
 
-For detailed usage instructions, see the [Samples](Samples~) included with this package.
+```csharp
+using AV.Unity.Extend.Runtime.Cache;
 
-## API Documentation
+public class ComponentCache
+{
+    private LazyCache<Rigidbody> _rbCache;
+    private LazyCache<Renderer> _rendererCache;
 
-For complete API reference and documentation, visit: https://github.com/IAFahim/AV.Unity.Extend
+    public void CacheComponents(Transform transform)
+    {
+        // First call: caches the component
+        _rbCache.TryLazyResolveComponent(transform, out var rb);
 
-## Changelog
+        // Subsequent calls: uses cached value
+        _rbCache.TryLazyResolveComponent(transform, out var rb2);
+    }
+}
+```
 
-See [CHANGELOG.md](CHANGELOG.md) for version history.
+### Cache Properties
+
+```csharp
+public struct LazyCache<T>
+{
+    public bool IsCached { get; set; }
+    public bool Exists { get; set; }
+    public T Reference { get; set; }
+}
+```
+
+## Benefits
+
+- ✅ Reduces redundant GetComponent calls
+- ✅ Automatic cache invalidation support
+- ✅ Type-safe generic implementation
+- ✅ Burst-compatible with proper constraints
 
 ## License
 
-MIT License - see [LICENSE.md](LICENSE.md) for details.
+MIT License - see [LICENSE.md](LICENSE.md)
 
 ## Author
 
-IAFahim - [https://github.com/IAFahim](https://github.com/IAFahim)
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-## Support
-
-For issues and questions, please use the [GitHub Issues](https://github.com/IAFahim/AV.Unity.Extend/issues) page.
+IAFahim - [iafahim.dev@gmail.com](mailto:iafahim.dev@gmail.com)

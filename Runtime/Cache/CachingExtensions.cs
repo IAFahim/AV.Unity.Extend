@@ -4,10 +4,6 @@ using UnityEngine;
 
 namespace AV.Unity.Extend.Runtime.Cache
 {
-    /// <summary>
-    /// Extension methods providing convenient adapters for component caching.
-    /// These methods delegate to the CacheLogic layer (Layer B).
-    /// </summary>
     public static class CachingExtensions
     {
         /// <summary>
@@ -40,8 +36,29 @@ namespace AV.Unity.Extend.Runtime.Cache
             out TValue result)
             where TValue : Component
         {
-            // Delegate to Logic layer (Layer B)
-            return CacheLogic.TryGetComponentInParentCached(source, key, cache, out result);
+            if (cache.TryGetValue(key, out result))
+            {
+                if (result != null) return true;
+                cache.Remove(key);
+            }
+
+            if (!source.TryGetComponentInParent(out result)) return false;
+            cache[key] = result;
+            return true;
+        }
+
+        /// <summary>
+        ///     Attempts to retrieve a component in the parent hierarchy, adhering to the strict TryX pattern.
+        /// </summary>
+        /// <typeparam name="T">The Component type to retrieve.</typeparam>
+        /// <param name="source">The component starting the search.</param>
+        /// <param name="result">The component if found; otherwise null.</param>
+        /// <returns><c>true</c> if found; otherwise <c>false</c>.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool TryGetComponentInParent<T>(this Component source, out T result) where T : Component
+        {
+            result = source.GetComponentInParent<T>();
+            return result != null;
         }
     }
 }
