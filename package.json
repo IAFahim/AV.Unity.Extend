@@ -1,7 +1,7 @@
 {
   "name": "com.av.unity.extend",
   "version": "1.0.0",
-  "displayName": "AV.Unity.Extend",
+  "displayName": "AV Unity Extend",
   "description": "Caching utilities and extension methods for Unity including LazyCache for component resolution",
   "unity": "2022.3",
   "author": {
@@ -17,7 +17,12 @@
     "optimization",
     "lazy"
   ],
+  "license": "MIT",
   "category": "Utilities",
   "dependencies": {},
-  "samples": []
+  "samples": [],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/IAFahim/AV.Unity.Extend"
+  }
 }

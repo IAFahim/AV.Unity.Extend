@@ -1,71 +1,42 @@
 # AV.Unity.Extend
 
-Caching utilities and extension methods for Unity including LazyCache for efficient component resolution.
+![Header](documentation_header.svg)
 
-## Features
+[![Unity](https://img.shields.io/badge/Unity-2022.3%2B-000000.svg?style=flat-square&logo=unity)](https://unity.com)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](LICENSE.md)
 
-- **LazyCache<T>** - Lazy component resolution with automatic caching
-- **Extension Methods** - Convenient utilities for common Unity operations
-- **Performance Optimized** - Minimize GetComponent calls with smart caching
-- **Generic Support** - Works with any component type
+Caching utilities and performance extensions.
 
-## Installation
+## ✨ Features
 
-Install via Unity Package Manager or add to `Packages/manifest.json`:
+- **LazyCache<T>**: Struct that resolves and caches `GetComponent` calls. Handles nulls and missing components efficiently.
+- **Extensions**: Optimizations for common Unity operations.
 
-```json
-{
-  "dependencies": {
-    "com.av.unity.extend": "1.0.0"
-  }
-}
-```
+## 📦 Installation
 
-## Usage
+Install via Unity Package Manager (git URL).
 
-### LazyCache
+## 🚀 Usage
 
 ```csharp
 using AV.Unity.Extend.Runtime.Cache;
 
-public class ComponentCache
+public struct MySystem
 {
-    private LazyCache<Rigidbody> _rbCache;
-    private LazyCache<Renderer> _rendererCache;
+    private LazyCache<Rigidbody> _rb;
 
-    public void CacheComponents(Transform transform)
+    public void Update(Transform t)
     {
-        // First call: caches the component
-        _rbCache.TryLazyResolveComponent(transform, out var rb);
-
-        // Subsequent calls: uses cached value
-        _rbCache.TryLazyResolveComponent(transform, out var rb2);
+        // Resolves once, then uses cached reference
+        if (_rb.TryLazyResolveComponent(t, out var rb))
+        {
+            rb.AddForce(Vector3.up);
+        }
     }
 }
 ```
 
-### Cache Properties
+## ⚠️ Status
 
-```csharp
-public struct LazyCache<T>
-{
-    public bool IsCached { get; set; }
-    public bool Exists { get; set; }
-    public T Reference { get; set; }
-}
-```
-
-## Benefits
-
-- ✅ Reduces redundant GetComponent calls
-- ✅ Automatic cache invalidation support
-- ✅ Type-safe generic implementation
-- ✅ Burst-compatible with proper constraints
-
-## License
-
-MIT License - see [LICENSE.md](LICENSE.md)
-
-## Author
-
-IAFahim - [iafahim.dev@gmail.com](mailto:iafahim.dev@gmail.com)
+- 🧪 **Tests**: Missing.
+- 📘 **Samples**: None.
